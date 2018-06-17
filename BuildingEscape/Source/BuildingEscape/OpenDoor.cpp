@@ -1,5 +1,6 @@
 // Copyright Keith Emery 2018
 
+#include "BuildingEscape.h"
 #include "OpenDoor.h"
 #include "GameFramework/Actor.h"
 
@@ -9,6 +10,7 @@ UOpenDoor::UOpenDoor()
 {
 	// Set this component to be initialized when the game starts, and to be ticked every frame.  You can turn these features
 	// off to improve performance if you don't need them.
+	bWantsBeginPlay = true;
 	PrimaryComponentTick.bCanEverTick = true;
 
 	// ...
@@ -24,7 +26,7 @@ void UOpenDoor::BeginPlay()
 	AActor* Owner = GetOwner();
 
 	// Create a rotator (FRotator takes three parameters pitch, yaw and roll)
-	FRotator NewRotation = FRotator(0.0f, 60.0f, 0.0f);
+	FRotator NewRotation = FRotator(0.f, 60.f, 0.f);
 
 	// Set the door rotation
 	Owner->SetActorRotation(NewRotation);
