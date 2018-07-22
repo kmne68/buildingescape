@@ -1,7 +1,7 @@
 // Copyright Keith Emery 2018
 
-#include "BuildingEscape.h"
 #include "Grabber.h"
+#include "BuildingEscape.h"
 #include "Engine/World.h"
 
 #define OUT
@@ -37,12 +37,30 @@ void UGrabber::TickComponent(float DeltaTime, ELevelTick TickType, FActorCompone
 	FRotator PlayerViewPointRotation;
 	GetWorld()->GetFirstPlayerController()->GetPlayerViewPoint(OUT PlayerViewPointLocation, OUT PlayerViewPointRotation);
 	
-	UE_LOG(LogTemp, Warning, TEXT("Location: %s, Rotation: %s"),
-		*PlayerViewPointLocation.ToString(),
-		*PlayerViewPointRotation.ToString()
+	// TODO log out to test
+	//UE_LOG(LogTemp, Warning, TEXT("Location: %s, Rotation: %s"),
+	//	*PlayerViewPointLocation.ToString(),
+	//	*PlayerViewPointRotation.ToString()
+	//);
+
+	//FVector LineTraceEnd = PlayerViewPointLocation + FVector(0.f, 0.f, 100.f); // viewpoint + 100cm up
+
+	FVector LineTraceEnd = PlayerViewPointLocation + (PlayerViewPointRotation.Vector() * reach);
+
+
+	// Draw a red trace in the direction the player is looking
+	DrawDebugLine(
+		GetWorld(),
+		PlayerViewPointLocation,
+		LineTraceEnd,
+		FColor(255, 0, 0),
+		false,
+		0.f,
+		0.f,
+		10.f
 	);
-	
-	
+
+
 	// Ray-cast
 
 	// See what player sees
