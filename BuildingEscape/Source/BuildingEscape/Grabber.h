@@ -5,6 +5,7 @@
 #include "DrawDebugHelpers.h"
 #include "CoreMinimal.h"
 #include "Components/ActorComponent.h"
+#include "PhysicsEngine/PhysicsHandleComponent.h"
 #include "Grabber.generated.h"
 
 
@@ -28,5 +29,7 @@ public:
 private:
 	// How far the player can reach (in cm)
 	float reach = 100.f;
+
+	UPhysicsHandleComponent* PhysicsHandle = nullptr;
 	
 };
